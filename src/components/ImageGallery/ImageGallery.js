@@ -4,9 +4,9 @@ import pixabayAPI from 'services/pixabay-api';
 import ImageGalleryItem from './ImageGalleryItem';
 import Loader from 'components/Loader';
 import ErrorSearch from 'components/ErrorSearch';
-import LoadMoreBtn from 'components/LoadMoreBtn';
+import Button from 'components/Button';
 import Modal from 'components/Modal';
-import s from './ImageGallery.module.css';
+import styles from './ImageGallery.module.css';
 
 export default class ImageGallery extends Component {
   static propTypes = {
@@ -104,10 +104,10 @@ export default class ImageGallery extends Component {
         <>
           {showModal && (
             <Modal onClose={this.toggleModal}>
-              <img src={url} alt={alt} className={s.modalImg} />
+              <img src={url} alt={alt} className={styles.ModalImg} />
             </Modal>
           )}
-          <ul className={s.imageGallery}>
+          <ul className={styles.ImageGallery}>
             {images.map(({ id, webformatURL, tags, largeImageURL }) => (
               <ImageGalleryItem
                 key={id}
@@ -118,7 +118,7 @@ export default class ImageGallery extends Component {
               />
             ))}
           </ul>
-          <LoadMoreBtn handleLoadMore={this.handleLoadBtnClick} />
+          <Button handleLoadMore={this.handleLoadBtnClick} />
         </>
       );
     }

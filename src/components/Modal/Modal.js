@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import s from './Modal.module.css';
+import styles from './Modal.module.css';
 
 export default class Modal extends Component {
   static propTypes = {
@@ -29,8 +29,8 @@ export default class Modal extends Component {
 
   render() {
     return (
-      <div className={s.overlay} onClick={this.handleBackdropClick}>
-        <div className={s.modal}>{this.props.children}</div>
+      <div className={styles.Overlay} onClick={this.handleBackdropClick}>
+        <div className={styles.Modal}>{this.props.children}</div>
       </div>
     );
   }
