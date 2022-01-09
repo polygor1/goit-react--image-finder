@@ -11,7 +11,7 @@ export function fetchImg(query, page) {
     if (response.ok) {
       return response.json();
     }
-    return Promise.reject(new Error('Oops! Nothing found'));
+    return Promise.reject(new Error('Oops! It is a fail'));
   });
 }
 

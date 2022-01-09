@@ -72,7 +72,7 @@ export default class ImageGallery extends Component {
 
   handleLoadBtnClick = async () => {
     const nextQuery = this.props.searchQuery;
-    await this.incrementPage();
+    await this.incrementPage(); // ага, щас!
     this.fetchImages(nextQuery);
     this.scrollDown();
   };
@@ -101,6 +101,7 @@ export default class ImageGallery extends Component {
     if (status === 'rejected') {
       return <ErrorSearch message={error.message} />;
     }
+
     if (status === 'resolved') {
       return (
         <>
