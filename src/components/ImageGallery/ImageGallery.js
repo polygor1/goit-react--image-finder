@@ -27,7 +27,7 @@ export default class ImageGallery extends Component {
     const nextQuery = this.props.searchQuery;
 
     if (prevQuery !== nextQuery) {
-      await this.reset();
+      await this.reset(); // ага, щас!
       this.setState({ status: 'pending' });
       this.fetchImages(nextQuery);
     }
@@ -39,14 +39,16 @@ export default class ImageGallery extends Component {
       .fetchImg(nextQuery, page)
       .then(({ hits }) => {
         if (hits.length === 0) {
-          return Promise.reject(new Error('Oops! Nothing found'));
+          // если ничего не пришло в ответе
+          return Promise.reject(new Error('Sorry! Nothing found'));
         }
-
+        // если удалось что-то получить
         this.setState(prevState => ({
           images: [...prevState.images, ...hits],
           status: 'resolved',
         }));
       })
+      // если все плохо
       .catch(error => this.setState({ error, status: 'rejected' }));
   };
 
