@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import pixabayAPI from 'services/pixabay-api';
+import GetListImg from 'components/services/GetListImg';
 import ImageGalleryItem from './ImageGalleryItem';
 import Loader from 'components/Loader';
 import ErrorSearch from 'components/ErrorSearch';
@@ -35,8 +35,7 @@ export default class ImageGallery extends Component {
 
   fetchImages = nextQuery => {
     const { page } = this.state;
-    pixabayAPI
-      .fetchImg(nextQuery, page)
+    GetListImg(nextQuery, page)
       .then(({ hits }) => {
         if (hits.length === 0) {
           // если ничего не пришло в ответе
@@ -72,7 +71,7 @@ export default class ImageGallery extends Component {
 
   handleLoadBtnClick = async () => {
     const nextQuery = this.props.searchQuery;
-    await this.incrementPage(); // ага, щас!
+    await this.incrementPage(); // ага, щас! бо все рухне!
     this.fetchImages(nextQuery);
     this.scrollDown();
   };
