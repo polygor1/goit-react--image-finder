@@ -27,7 +27,7 @@ export default class ImageGallery extends Component {
     const nextQuery = this.props.searchQuery;
 
     if (prevQuery !== nextQuery) {
-      await this.reset(); // ага, щас, все рухне!
+      await this.reset(); // ага, щас, і все рухне!
       this.setState({ status: 'pending' });
       this.fetchImages(nextQuery);
     }
@@ -71,7 +71,7 @@ export default class ImageGallery extends Component {
 
   handleLoadBtnClick = async () => {
     const nextQuery = this.props.searchQuery;
-    await this.incrementPage(); // ага, щас, все рухне!
+    await this.incrementPage(); // ага, щас, і все рухне!
     this.fetchImages(nextQuery);
     this.scrollDown();
   };
@@ -119,7 +119,11 @@ export default class ImageGallery extends Component {
           </>
         );
       default:
-        alert('Sorry, i do not know what to do');
+        return Promise.reject(
+          new Error(
+            'Sorry, I am completely at a loss and do not know what to do',
+          ),
+        );
     }
   }
 }

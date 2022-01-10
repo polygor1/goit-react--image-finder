@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 const BASE_URL = 'https://pixabay.com/api';
 const API_KEY = '24123899-30dafe3a116d297502be19e37';
 const IMG_TYPE = 'photo';
@@ -13,3 +15,8 @@ export default async function GetListImg(query, page) {
   }
   return await Promise.reject(new Error('Oops! It is a fail'));
 }
+
+GetListImg.propTypes = {
+  query: PropTypes.string.isRequired,
+  page: PropTypes.number.isRequired,
+};

@@ -4,10 +4,6 @@ import { toast } from 'react-toastify';
 import styles from './Searchbar.module.css';
 
 export default class Searchbar extends Component {
-  static propTypes = {
-    onSubmit: PropTypes.func.isRequired,
-  };
-
   state = {
     query: '',
   };
@@ -51,3 +47,7 @@ export default class Searchbar extends Component {
     );
   }
 }
+
+Searchbar.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};

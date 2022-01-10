@@ -3,10 +3,6 @@ import PropTypes from 'prop-types';
 import styles from './Modal.module.css';
 
 export default class Modal extends Component {
-  static propTypes = {
-    onClose: PropTypes.func.isRequired,
-  };
-
   componentDidMount() {
     window.addEventListener('keydown', this.handleKeyDown);
   }
@@ -35,3 +31,7 @@ export default class Modal extends Component {
     );
   }
 }
+
+Modal.propTypes = {
+  onClose: PropTypes.func.isRequired,
+};
