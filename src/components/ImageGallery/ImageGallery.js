@@ -27,7 +27,7 @@ export default class ImageGallery extends Component {
     const nextQuery = this.props.searchQuery;
 
     if (prevQuery !== nextQuery) {
-      await this.reset(); // ага, щас!
+      await this.reset(); // ага, щас, все рухне!
       this.setState({ status: 'pending' });
       this.fetchImages(nextQuery);
     }
@@ -71,7 +71,7 @@ export default class ImageGallery extends Component {
 
   handleLoadBtnClick = async () => {
     const nextQuery = this.props.searchQuery;
-    await this.incrementPage(); // ага, щас! бо все рухне!
+    await this.incrementPage(); // ага, щас, все рухне!
     this.fetchImages(nextQuery);
     this.scrollDown();
   };
@@ -89,40 +89,37 @@ export default class ImageGallery extends Component {
     const { images, error, status, showModal } = this.state;
     const { url, alt } = this.state.modalImgProps;
 
-    if (status === 'idle') {
-      return <div></div>;
-    }
-
-    if (status === 'pending') {
-      return <Loader />;
-    }
-
-    if (status === 'rejected') {
-      return <ErrorSearch message={error.message} />;
-    }
-
-    if (status === 'resolved') {
-      return (
-        <>
-          {showModal && (
-            <Modal onClose={this.toggleModal}>
-              <img src={url} alt={alt} className={styles.ModalImg} />
-            </Modal>
-          )}
-          <ul className={styles.ImageGallery}>
-            {images.map(({ id, webformatURL, tags, largeImageURL }) => (
-              <ImageGalleryItem
-                key={id}
-                src={webformatURL}
-                url={largeImageURL}
-                alt={tags}
-                openModal={this.handleImgClick}
-              />
-            ))}
-          </ul>
-          <Button handleLoadMore={this.handleLoadBtnClick} />
-        </>
-      );
+    switch (status) {
+      case 'idle':
+        return <div></div>;
+      case 'pending':
+        return <Loader />;
+      case 'rejected':
+        return <ErrorSearch message={error.message} />;
+      case 'resolved':
+        return (
+          <>
+            {showModal && (
+              <Modal onClose={this.toggleModal}>
+                <img src={url} alt={alt} className={styles.ModalImg} />
+              </Modal>
+            )}
+            <ul className={styles.ImageGallery}>
+              {images.map(({ id, webformatURL, tags, largeImageURL }) => (
+                <ImageGalleryItem
+                  key={id}
+                  src={webformatURL}
+                  url={largeImageURL}
+                  alt={tags}
+                  openModal={this.handleImgClick}
+                />
+              ))}
+            </ul>
+            <Button handleLoadMore={this.handleLoadBtnClick} />
+          </>
+        );
+      default:
+        alert('Sorry, i do not know what to do');
     }
   }
 }

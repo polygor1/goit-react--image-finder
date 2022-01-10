@@ -12,13 +12,13 @@ export default class Searchbar extends Component {
     query: '',
   };
 
-  handleQueryChange = e => {
-    this.setState({ query: e.currentTarget.value.toLowerCase() });
+  handleQueryChange = event => {
+    this.setState({ query: event.currentTarget.value.toLowerCase() });
   };
 
-  handleSubmit = e => {
+  handleSubmit = event => {
     const { query } = this.state;
-    e.preventDefault();
+    event.preventDefault();
     if (query.trim() === '') {
       toast.error('Please, enter search query.');
       return;
